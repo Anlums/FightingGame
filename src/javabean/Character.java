@@ -38,6 +38,6 @@ public class Character {
     }
     //展示当前属性
     public void show(){
-        System.out.println("[当前生命" + HP +"，攻击" + attack + "，防御" + defense +"]");
+        System.out.println( "名字：" + name + "[当前生命" + HP +"，攻击" + attack + "，防御" + defense +"]");
     }
 }
