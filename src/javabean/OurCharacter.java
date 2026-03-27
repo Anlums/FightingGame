@@ -1,5 +1,7 @@
 package javabean;
 
+import anlums.ui.ColorUtils;
+
 import java.util.ArrayList;
 
 public class OurCharacter extends Character{
@@ -17,6 +19,10 @@ public class OurCharacter extends Character{
     public void showSkill() {
 
     }
-
+    public void show() {
+        System.out.println( ColorUtils.purple + "名字：" + name + "【生命值"+ HP + "/"
+                + maxHP +"，攻击 : " + attack
+                + "，防御 : " + defense +"】" + ColorUtils.RESET );
+    }
 
 }

@@ -15,7 +15,7 @@ public class Login {
 
         //ctrl + alt + T
         while (true) {
-            System.out.println("[😉请选择操作：1.登录 2.注册 3.退出]");
+            System.out.println("[😉请选择操作：1.登录 2.注册 3.退出 4.忘记密码]");
             Scanner scanner = new Scanner(System.in);
             int choose = scanner.nextInt();
             switch (choose) {
@@ -25,6 +25,7 @@ public class Login {
                 }
                 case 2 -> register(list);
                 case 3 -> exit();
+                case 4 -> modifyPassword( list);
                 default -> System.out.println("你选择错误");
             }
         }
@@ -76,7 +77,7 @@ public class Login {
 
             if(!rightUser.isStatus()) {
                 System.out.println("该用户已锁定");
-                continue;
+                break;
             }
 
             if(rightUser.getPassword().equals(password)) {
@@ -237,5 +238,61 @@ public class Login {
         }
         return charCount > 0 && otherCount == 0 && numCount > 0;
     }
+
+    public void modifyPassword(ArrayList<User> list) {
+        System.out.println("你选择修改密码操作");
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            System.out.println("请输入用户名：");
+            String username = sc.next();
+
+            int index = findIndex(list, username);
+            if (index == -1) {
+                System.out.println("用户名不存在，请您先注册");
+                break;
+            }
+            //验证码验证身份
+            while(true) {
+                String chaptcha = getCaptcha();
+                System.out.println("验证码：" + chaptcha);
+                System.out.println("请输入验证码：");
+                String inputChaptcha = sc.next();
+                if (!inputChaptcha.equals(chaptcha)) {
+                    System.out.println("验证码输入错误，请重新输入");
+                    continue;
+                }else {
+                    System.out.println("验证码输入正确");
+                    break;
+                }
+            }
+
+            while (true) {
+                System.out.println("请输入新密码：");
+                String firstPassword = sc.next();
+                if (!checkLen(firstPassword, 3, 8)) {
+                    System.out.println("密码长度必须在3-8个字符之间");
+                    continue;
+                }
+                if (!checkPassword(firstPassword)) {
+                    System.out.println("密码只能由字母数字组成，不能是纯数字");
+                    continue;
+                }
+                System.out.println("请再次输入新密码：");
+                String secondPassword = sc.next();
+                if (!firstPassword.equals(secondPassword)) {
+                    System.out.println("两次输入的密码不一致,请重新输入");
+                    continue;
+                }
+                list.get(index).setPassword(firstPassword);
+                break;
+            }
+            list.get( index).setStatus( true);
+            System.out.println("密码修改成功");
+            break;
+
+        }
+
+    }
+
 
 }
