@@ -320,6 +320,7 @@ public class FinghtingGame {
         return damage;
     }
 
+
     //敌方回合
     public void enemyTurn(OurCharacter oc, EnemyCharacter ec) {
         System.out.println("=====" + ec.name + "的回合=====");
