@@ -122,7 +122,6 @@ public class FinghtingGame {
 
         //停止虚拟机运行
         System.exit(0);
-
     }
 
     public OurCharacter createOurCharacter(String username) {
